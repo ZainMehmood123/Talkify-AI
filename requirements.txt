@@ -1,8 +1,8 @@
 streamlit
-whisper==1.0.0  # Explicitly install the compatible version
-torch==1.10.0    # Specify torch version
+whisper
+torch
 googletrans==4.0.0-rc1
-transformers==4.18.0  # Ensure the correct and stable version
+transformers
 
 
 
