@@ -1,0 +1,5 @@
+streamlit
+whisper==1.0.0
+googletrans==4.0.0-rc1
+transformers
+torch==1.10.0
