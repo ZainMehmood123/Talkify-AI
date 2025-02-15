@@ -1,6 +1,6 @@
 import streamlit as st
-import whisper
-from googletrans import Translator, LANGUAGES
+import whisperfrom 
+from deep_translator import GoogleTranslator
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 import os
@@ -25,15 +25,13 @@ def transcribe_audio(audio_file):
     return result['text']
 
 # Function to translate text
-# Function to translate text
+# Function to translate text using Deep Translator
 def translate_text(text, target_lang):
-    translator = Translator()
     try:
-        translated = translator.translate(text, dest=target_lang)
-        return translated.text if translated else "Translation failed"
+        translated = GoogleTranslator(source="auto", target=target_lang).translate(text)
+        return translated
     except Exception as e:
         return f"Translation Error: {str(e)}"
-
 # Function to generate text using DistilGPT-2
 def generate_text_with_gpt2(prompt):
     inputs = tokenizer.encode(prompt, return_tensors="pt")
