@@ -1,5 +1,5 @@
 streamlit
 openai-whisper
-googletrans
+deep-translator
 transformers
 torch
