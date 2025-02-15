@@ -9,10 +9,9 @@ import os
 model = whisper.load_model("base")
 print("Model loaded successfully")
 
-
-# Load GPT-2 model and tokenizer from Hugging Face
-tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-gpt2_model = GPT2LMHeadModel.from_pretrained("gpt2")
+# Load smaller DistilGPT-2 model and tokenizer from Hugging Face
+tokenizer = GPT2Tokenizer.from_pretrained("distilgpt2")
+gpt2_model = GPT2LMHeadModel.from_pretrained("distilgpt2")
 
 # Function to transcribe audio
 def transcribe_audio(audio_file):
@@ -30,10 +29,10 @@ def translate_text(text, target_lang):
     translated = translator.translate(text, dest=target_lang)
     return translated.text
 
-# Function to generate text using GPT-2 from Hugging Face
+# Function to generate text using DistilGPT-2
 def generate_text_with_gpt2(prompt):
     inputs = tokenizer.encode(prompt, return_tensors="pt")
-    outputs = gpt2_model.generate(inputs, max_length=2500, num_return_sequences=1, no_repeat_ngram_size=2, early_stopping=True)
+    outputs = gpt2_model.generate(inputs, max_length=500, num_return_sequences=1, no_repeat_ngram_size=2, early_stopping=True)
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return generated_text
 
@@ -49,7 +48,6 @@ st.markdown("""
         font-family: 'Roboto', sans-serif;
         color: #333;
     }
-
     .header {
         font-size: 48px;
         color: #4A90E2;
@@ -58,14 +56,12 @@ st.markdown("""
         margin-bottom: 10px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
-
     .subheader {
         font-size: 24px;
         color: #4A90E2;
         text-align: center;
         margin-bottom: 30px;
     }
-
     .section-header {
         font-size: 28px;
         color: #4A90E2;
@@ -73,7 +69,6 @@ st.markdown("""
         margin-top: 40px;
         margin-bottom: 20px;
     }
-
     .box {
         background-color: #ffffff;
         border-radius: 12px;
@@ -82,30 +77,24 @@ st.markdown("""
         margin-bottom: 20px;
         transition: all 0.3s ease;
     }
-
     .box:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
-
     .box-header {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 10px;
     }
-
     .transcribed-text {
         color: #1E88E5;
     }
-
     .translated-text {
         color: #039BE5;
     }
-
     .ai-response-text {
         color: #0288D1;
     }
-
     .stButton>button {
         background-color: #4CAF50;
         color: white;
@@ -116,28 +105,23 @@ st.markdown("""
         border-radius: 5px;
         transition: all 0.3s ease;
     }
-
     .stButton>button:hover {
         background-color: #45a049;
         transform: scale(1.05);
     }
-
     .audio-upload-section {
         margin-top: 20px;
         font-size: 18px;
         text-align: center;
     }
-
     .emoji {
         font-size: 36px;
         margin-right: 10px;
         vertical-align: middle;
     }
-
     .stAudio {
         width: 100%;
     }
-
     .language-select {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -191,7 +175,7 @@ if audio_file is not None:
     st.markdown('<div class="section-header">🌍 Translation</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="box"><div class="box-header translated-text">🗣️ Translated Text ({selected_language}):</div><div class="translated-text">{translated_text}</div></div>', unsafe_allow_html=True)
 
-    # Generate GPT-2 response
+    # Generate DistilGPT-2 response
     with st.spinner('🤖 Generating AI response...'):
         ai_response = generate_text_with_gpt2(transcribed_text)
     st.markdown('<div class="section-header">🤖 AI Chatbot Response</div>', unsafe_allow_html=True)
