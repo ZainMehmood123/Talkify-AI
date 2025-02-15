@@ -1,5 +1,5 @@
 import streamlit as st
-import whisperfrom 
+import whisper
 from deep_translator import GoogleTranslator
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
