@@ -1,7 +1,8 @@
 import streamlit as st
 import whisper
 from googletrans import Translator, LANGUAGES
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
 import os
 
 # Load Whisper model
@@ -9,8 +10,8 @@ model = whisper.load_model("base")
 print("Model loaded successfully")
 
 # Load smaller DistilGPT-2 model and tokenizer from Hugging Face
-tokenizer = GPT2Tokenizer.from_pretrained("distilgpt2")
-gpt2_model = GPT2LMHeadModel.from_pretrained("distilgpt2")
+tokenizer = AutoTokenizer.from_pretrained("distilgpt2")
+gpt2_model = AutoModelForCausalLM.from_pretrained("distilgpt2")
 
 # Function to transcribe audio
 def transcribe_audio(audio_file):
