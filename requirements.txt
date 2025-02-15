@@ -1,8 +1,6 @@
 streamlit
 openai-whisper
-torch
 googletrans==4.0.0-rc1
 transformers
-
-
-
+torch
+tempfile
