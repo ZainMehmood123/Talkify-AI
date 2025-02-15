@@ -25,10 +25,14 @@ def transcribe_audio(audio_file):
     return result['text']
 
 # Function to translate text
+# Function to translate text
 def translate_text(text, target_lang):
     translator = Translator()
-    translated = translator.translate(text, dest=target_lang)
-    return translated.text
+    try:
+        translated = translator.translate(text, dest=target_lang)
+        return translated.text if translated else "Translation failed"
+    except Exception as e:
+        return f"Translation Error: {str(e)}"
 
 # Function to generate text using DistilGPT-2
 def generate_text_with_gpt2(prompt):
